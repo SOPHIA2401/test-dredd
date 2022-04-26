@@ -3,10 +3,9 @@ version: 2
 orbs:
   node: circleci/node@4.7.0
 
-workflows:
-   testing: 
-    jobs:
-      dredd:
+
+jobs:
+    build:
         macos:
           xcode: 12.5.1
         steps:
@@ -15,4 +14,3 @@ workflows:
           - run: npm install @opensearch-project/opensearch
           - run: npm install hooks
           - run: dredd ../all-2.yaml https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com --user=sofigarg:T@rget2023 --hookfiles=../all-2.js
-
