@@ -1,0 +1,31 @@
+name: CI
+
+on: [push, pull_request]
+
+env:
+  GRADLE_OPTS: -Dhttp.keepAlive=false
+
+jobs:
+  build:
+
+    run-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        node-version: [14.x]
+
+
+    steps:
+
+    - name: Checkout security
+      uses: actions/checkout@v2
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1  
+      with:  
+        node-version: ${{ matrix.node-version }}
+    - run: npm install dredd@14.1.0 --global
+    - run: npm install @opensearch-project/opensearch --global
+    - run: dredd ./all-2.yaml https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com --user=sofigarg:T@rget2023 --hookfiles=./all-2.js
+
