@@ -1,45 +1,12 @@
-# This config is equivalent to both the '.circleci/extended/orb-free.yml' and the base '.circleci/config.yml'
 version: 2.1
-
-# Orbs are reusable packages of CircleCI configuration that you may share across projects, enabling you to create encapsulated, parameterized commands, jobs, and executors that can be used across multiple projects.
-# See: https://circleci.com/docs/2.0/orb-intro/
-orbs:
-  node: circleci/node@4.7
-
-# Invoke jobs via workflows
-# See: https://circleci.com/docs/2.0/configuration-reference/#workflows
-jobs: # a basic unit of work in a run
-  # test: # your job name
-  #   macos:
-  #     xcode: 12.5.1 # indicate your selected version of Xcode
-  #   steps: # a series of commands to run
-      # - checkout  # pull down code from your version control system.
-      # - node/install-packages:
-      #     pkg-manager: npm
-      # - run:
-      #     name: Run Unit Tests
-          # command: Dredd ../all-2.yaml https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com --user=sofigarg:T@rget2023 --hookfiles=../all-2.js
-
-  build:
+jobs:
+  dredd:
     macos:
-      xcode: 12.5.1 # indicate your selected version of Xcode
+      xcode: 12.5.1
     steps:
       - checkout
-      - run:
-          # build our application
-          name: Build Application
-          command: Dredd ../all-2.yaml https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com --user=sofigarg:T@rget2023 --hookfiles=../all-2.js
-
-
-
-workflows:
-  sample: # This is the name of the workflow, feel free to change it to better match your workflow.
-    # Inside the workflow, you define the jobs you want to run.
-    jobs:
-      - node/test:
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
-          version: '16.10'
-          # If you are using yarn, change the line below from "npm" to "yarn"
-          pkg-manager: npm
+      - run: npm install dredd@14.1.0 --global
+      - run: npm install @opensearch-project/opensearch
+      - run: npm install hooks
+      - run: dredd ../all-2.yaml https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com --user=sofigarg:T@rget2023 --hookfiles=../all-2.js
+        
