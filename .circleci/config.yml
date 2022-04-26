@@ -11,6 +11,6 @@ jobs:
         steps:
           - checkout
           - run: npm install dredd@14.1.0 --global
-          - run: npm install @opensearch-project/opensearch
-          - run: npm install hooks
+          # - run: npm install @opensearch-project/opensearch
+          # - run: npm install hooks
           - run: dredd ../all-2.yaml https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com --user=sofigarg:T@rget2023 --hookfiles=../all-2.js
