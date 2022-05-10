@@ -27,7 +27,7 @@ def dredd_work(endpoint, username, password, testname, path,tpass,tfail):
         curr_dir = curr_path[len(curr_path)-1] 
         print(f'FOUND DIRECTORY: { dirpath }')            
         if files:
-            command = "Dredd " + dirpath +"/"+ files[1]+ " " + endpoint+ " --user=" + username + ":" + password + " --hookfiles="+dirpath +"/"+files[0]+" -d"
+            command = "dredd " + dirpath +"/"+ files[1]+ " " + endpoint+ " --user=" + username + ":" + password + " --hookfiles="+dirpath +"/"+files[0]+" -d"
             # command = "Dredd " + dirpath +"/"+ files[1]+ " " + endpoint+ " --user=" + username + ":" + password + " --hookfiles="+dirpath +"/"+files[0]
             # command = "Dredd " + dirpath +"/"+ files[1]+ " " + endpoint + " --user=" + username + ":" + password 
             if testname != "":

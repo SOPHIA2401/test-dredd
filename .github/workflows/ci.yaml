@@ -18,6 +18,7 @@ jobs:
     - name: Run script file
 
       run: |
+          dredd --version
           python driver-code.py          
       shell: bash
       working-directory: ./test
