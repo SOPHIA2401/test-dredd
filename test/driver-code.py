@@ -75,6 +75,7 @@ if args.testname is not None:
     testname  = args.testname  
 
 tfail = dredd_work(endpoint, username, password, testname, path,tpass,tfail)
+exit(tfail)
 
 # os._exit(tfail)
 # COMMAND LINE ARGUMENT PARSER  --> DONE
