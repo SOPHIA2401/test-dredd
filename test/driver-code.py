@@ -48,7 +48,7 @@ def dredd_work(endpoint, username, password, testname, path,tpass,tfail):
                     tpass = tpass+1
                 else:
                     tfail = tfail+1
-    return tfail                
+    return tpass                
 
 # Parsing command line arguments:
 parser = argparse.ArgumentParser()
