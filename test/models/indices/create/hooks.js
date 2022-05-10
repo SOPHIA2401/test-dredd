@@ -12,7 +12,7 @@ const fetch = require("node-fetch");
 var hooks = require('hooks');
 const fs = require('fs')
   
-fs.readFile('.../url.txt', (err, data) => {
+fs.readFile('url.txt', (err, data) => {
     if (err) throw err;
     console.log("><><><><><><><><><><><");
     console.log(data.toString());

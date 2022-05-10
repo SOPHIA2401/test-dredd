@@ -75,10 +75,12 @@ if args.testname is not None:
     testname  = args.testname  
 
 # file_obj = open('./test/url.txt', "w") 
-f = open("test-dredd/test/url.txt", mode='w', encoding='utf-8') 
-f.write(endpoint,"\n")
-f.write(username,"\n")
-f.write(password,"\n")
+f = open("url.txt", mode='w', encoding='utf-8') 
+f.write(endpoint)
+f.write("\t")
+f.write(username)
+f.write("\t")
+f.write(password)
 f.seek(0,0)
 
 tfail = dredd_work(endpoint, username, password, testname, path,tpass,tfail)
