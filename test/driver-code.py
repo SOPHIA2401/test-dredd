@@ -22,7 +22,7 @@ def dredd_work(endpoint, username, password, testname, path,tpass,tfail):
     # Walking a directory tree and printing the names of the directories and files
     # if path == "":
     #    path = "./models"
-    for dirpath, dirnames, files in os.walk("./models"):
+    for dirpath, dirnames, files in os.walk("./models"+path):
         curr_path = dirpath.split('/')
         curr_dir = curr_path[len(curr_path)-1] 
         print(f'FOUND DIRECTORY: { dirpath }')            
@@ -77,9 +77,9 @@ if args.testname is not None:
 # file_obj = open('./test/url.txt', "w") 
 f = open("url.txt", mode='w', encoding='utf-8') 
 f.write(endpoint)
-f.write("\t")
+f.write(" ")
 f.write(username)
-f.write("\t")
+f.write(" ")
 f.write(password)
 f.seek(0,0)
 
@@ -87,12 +87,3 @@ tfail = dredd_work(endpoint, username, password, testname, path,tpass,tfail)
 
 f.close() 
 exit(tfail)
-
-# os._exit(tfail)
-# COMMAND LINE ARGUMENT PARSER  --> DONE
-
-# ITERATIVELY MOVE INTO DIRECTORY --> DONE
-
-# RUN TERMINAL COMMAND USING PYTHON --> DONE
-
-# CHECK RESULTS AND EXIT
