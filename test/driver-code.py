@@ -76,7 +76,7 @@ if args.testname is not None:
 
 tfail = dredd_work(endpoint, username, password, testname, path,tpass,tfail)
 
-os._exit(tfail)
+# os._exit(tfail)
 # COMMAND LINE ARGUMENT PARSER  --> DONE
 
 # ITERATIVELY MOVE INTO DIRECTORY --> DONE
