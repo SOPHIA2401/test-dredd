@@ -75,7 +75,7 @@ if args.testname is not None:
     testname  = args.testname  
 
 # file_obj = open('./test/url.txt', "w") 
-f = open("./test/url.txt", mode='w', encoding='utf-8') 
+f = open("test-dredd/test/url.txt", mode='w', encoding='utf-8') 
 f.write(endpoint,"\n")
 f.write(username,"\n")
 f.write(password,"\n")
