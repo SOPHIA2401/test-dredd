@@ -74,7 +74,16 @@ if args.path is not None:
 if args.testname is not None:
     testname  = args.testname  
 
+# file_obj = open('./test/url.txt', "w") 
+f = open("./test/url.txt", mode='w', encoding='utf-8') 
+f.write(endpoint,"\n")
+f.write(username,"\n")
+f.write(password,"\n")
+f.seek(0,0)
+
 tfail = dredd_work(endpoint, username, password, testname, path,tpass,tfail)
+
+f.close() 
 exit(tfail)
 
 # os._exit(tfail)

@@ -15,6 +15,7 @@ jobs:
     - run: npm install node-fetch@2
     - run: npm install hooks
     - run: npm install https
+    - run: npm install fs
     - name: Run script file
 
       run: |

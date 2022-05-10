@@ -8,7 +8,25 @@ var url = protocol + "://" + auth + "@" + host;
 const https = require('https');
 
 var hooks  = require('hooks');
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+const fetch = require("node-fetch");
+
+const fs = require('fs')
+  
+fs.readFile('.../url.txt', (err, data) => {
+    if (err) throw err;
+    console.log("><><><><><><><><><><><");
+    console.log(data.toString());
+    text = data.toString()
+    text = text.split(" ");
+    console.log("><><><><><><><><><><><");
+    host = text[0];
+    protocol = "https";
+    auth = text[1]+":"+text[2];
+
+});
+
+var url = protocol + "://" + auth + "@" + host;
+console.log(url);
 
 // PING API
 

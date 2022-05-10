@@ -7,12 +7,28 @@ var url = protocol + "://" + auth + "@" + host;
 
 const https = require('https');
 // const fetch = require('node-fetch')
+const fetch = require("node-fetch");
 
 var hooks = require('hooks');
+const fs = require('fs')
+  
+fs.readFile('.../url.txt', (err, data) => {
+    if (err) throw err;
+    console.log("><><><><><><><><><><><");
+    console.log(data.toString());
+    text = data.toString()
+    text = text.split(" ");
+    console.log("><><><><><><><><><><><");
+    host = text[0];
+    protocol = "https";
+    auth = text[1]+":"+text[2];
 
-// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+});
 
-const fetch = require("node-fetch");
+var url = protocol + "://" + auth + "@" + host;
+console.log(url);
+
+
 
 hooks.before("/{index} > PUT > 200 > application/json",function(transactions,done){
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
