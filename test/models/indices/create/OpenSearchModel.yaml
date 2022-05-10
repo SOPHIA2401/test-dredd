@@ -73,10 +73,10 @@ components:
         - index
         - shards_acknowledged
         - acknowledged
-      # example: 
-      #   index: books
-      #   shards_acknowledged: true
-      #   acknowledged: true  
+      example: 
+        index: books
+        shards_acknowledged: true
+        acknowledged: true  
     UserDefinedValueMap:
       type: object
       additionalProperties: {}

@@ -10,23 +10,9 @@ const https = require('https');
 
 var hooks = require('hooks');
 
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+// const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
-// Create Index API
-// const request = async () => {
-      
-//     console.log("DELETE CLUSTER AFTER COMPLETE VALIDATION CREATE INDEX API.");
-
-//     const response = await fetch(url+'/books',{
-//       method: 'DELETE'
-//     });
-//     console.log("=====================");
-//     const json = await response.json();
-//     console.log(json);
-//     // done();
-//   } 
-  
-//   request();
+const fetch = require("node-fetch");
 
 hooks.before("/{index} > PUT > 200 > application/json",function(transactions,done){
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
