@@ -1,0 +1,26 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js 
+      uses: actions/setup-node@v1  
+    
+    - run: npm install dredd@14.1.0 --global
+    - run: npm install node-fetch@2
+    - run: npm install hooks
+    - run: npm install https
+    - name: Run script file
+
+      run: |
+          python driver-code.py          
+      shell: bash
+      working-directory: ./test
+
+        #  chmod +x ./test/driver-code.py
+        #  ./test/driver-code.py

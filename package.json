@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@opensearch-project/opensearch": "^1.1.0",
-    "dredd": "^14.1.0",
-    "hooks": "^0.3.2"
-  }
-}
