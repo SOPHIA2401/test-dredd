@@ -8,8 +8,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Using Docker
-      run: docker-compose -f "docker-compose.yml" up -d --build
+    - name: Build the stack
+      run: docker-compose up -d
 
     - name: Use Node.js 
       uses: actions/setup-node@v1  
