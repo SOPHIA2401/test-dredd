@@ -10,10 +10,6 @@ jobs:
 
     - name: Using Docker
       uses: docker-practice/actions-setup-docker@master
-      run: |
-          set -x 
-          docker version
-          docker run --rm hello-world         
 
     - name: Use Node.js 
       uses: actions/setup-node@v1  
@@ -26,6 +22,9 @@ jobs:
     - name: Run script file
 
       run: |
+          set -x 
+          docker version
+          docker run --rm hello-world  
           dredd --version
           python driver-code.py          
       shell: bash
