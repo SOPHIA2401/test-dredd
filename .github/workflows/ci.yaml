@@ -20,7 +20,7 @@ jobs:
 
     - name: Build the stack
       run: |   
-        docker-compose up -d 
+        docker-compose up 
 
       shell: bash
       working-directory: ./test  
