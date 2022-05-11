@@ -19,7 +19,6 @@ jobs:
     - name: Run script file
 
       run: |
-          export NODE_TLS_REJECT_UNAUTHORIZED=0
           dredd --version
           python driver-code.py          
       shell: bash

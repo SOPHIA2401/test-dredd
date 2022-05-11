@@ -6,12 +6,12 @@ class Dredd:
         if endpoint is not None:
             self.endpoint = endpoint
         else:     
-            self.endpoint = "https://localhost:9200"
+            self.endpoint = "https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com"
 
         if user is not None:
             self.user = user
         else:
-            self.user = "admin:admin"
+            self.user = "sofigarg:T@rget2023"
 
         if path is not None:
             self.path = path
