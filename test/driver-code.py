@@ -33,7 +33,7 @@ class Dredd:
     def dredd_work(self):
         # Walking a test directory tree and run dredd framework.
         test_failed = 0
-        for dirpath, dirnames, files in os.walk("./models"+path):
+        for dirpath, dirnames, files in os.walk("./models"+self.path):
             curr_path = dirpath.split('/')
             curr_dir = curr_path[len(curr_path)-1]         
             if files:
