@@ -1,54 +1,54 @@
 import argparse
 import os
-# Declaring global parameters: 
-endpoint = "https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com"
-username = "sofigarg"
-password = "T@rget2023"
-testname = ""
-path = ""
-tpass = 0
-tfail = 0
 
-# Function for dredd framework implementation
+class Dredd:
+    def __init__(self, endpoint, user, path, test_name):
+        if endpoint is not None:
+            self.endpoint = endpoint
+        else:     
+            self.endpoint = "https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com"
 
-def dredd_work(endpoint, username, password, testname, path,tpass,tfail):
-    print("===================") 
-    print("Endpoint: ",endpoint)
-    print("Username: ",username)
-    print("Password: ",password)
-    print("Path: ",path)
-    print("TestName: ",testname)
-    print("===================") 
-    # Walking a directory tree and printing the names of the directories and files
-    # if path == "":
-    #    path = "./models"
-    for dirpath, dirnames, files in os.walk("./models"+path):
-        curr_path = dirpath.split('/')
-        curr_dir = curr_path[len(curr_path)-1] 
-        print(f'FOUND DIRECTORY: { dirpath }')            
-        if files:
-            command = "dredd " + dirpath +"/"+ files[1]+ " " + endpoint+ " --user=" + username + ":" + password + " --hookfiles="+dirpath +"/"+files[0]+" -d"
-            # command = "Dredd " + dirpath +"/"+ files[1]+ " " + endpoint+ " --user=" + username + ":" + password + " --hookfiles="+dirpath +"/"+files[0]
-            # command = "Dredd " + dirpath +"/"+ files[1]+ " " + endpoint + " --user=" + username + ":" + password 
-            if testname != "":
-                if testname == curr_dir:
-                    print(command)
-                    result = os.system(command)
-                    print("RESULT: ><><><><><>< ",result)
-                    if(result == 0):
-                       tpass = tpass+1
-                    else:
-                        tfail = tfail+1   
+        if user is not None:
+            self.user = user
+        else:
+            self.user = "sofigarg:T@rget2023"
 
-            else:
-                print(command)
-                result = os.system(command)  
-                print("RESULT: ><><><><><>< ",result)  
-                if(result == 0):
-                    tpass = tpass+1
+        if path is not None:
+            self.path = path
+        else:
+            self.path = ""    
+
+        if test_name is not None:
+            self.test_name  = test_name 
+        else:
+            self.test_name = ""  
+
+    def write_file(self): 
+        file_obj = open("url.txt", mode='w', encoding='utf-8') 
+        text = self.endpoint + " " + self.user 
+        file_obj.write(text)
+        file_obj.seek(0,0)
+        file_obj.close()
+
+    def dredd_work(self):
+        # Walking a test directory tree and run dredd framework.
+        test_failed = 0
+        for dirpath, dirnames, files in os.walk("./models"+path):
+            curr_path = dirpath.split('/')
+            curr_dir = curr_path[len(curr_path)-1]         
+            if files:
+                command = "dredd " + dirpath +"/"+ files[1]+ " " + self.endpoint+ " --user=" + self.user + " --hookfiles=" + dirpath + "/" + files[0]
+                if self.test_name != "":
+                    if self.test_name == curr_dir:
+                        result = os.system(command)
+                        if(result != 0):
+                            test_failed = test_failed+1                               
                 else:
-                    tfail = tfail+1
-    return tfail                
+                    result = os.system(command)  
+                    if(result != 0):
+                        test_failed = test_failed+1
+        return test_failed      
+
 
 # Parsing command line arguments:
 parser = argparse.ArgumentParser()
@@ -60,30 +60,10 @@ parser.add_argument('--testname', type=str, required=False)
 args = parser.parse_args()
 
 # Check whether default arguments provided by user:
-if args.endpoint is not None:
-    endpoint = args.endpoint
+obj = Dredd(args.endpoint,args.user,args.path,args.testname)
 
-if args.user is not None:
-    user = (args.user).split(':')
-    username = user[0]
-    password = user[1]
+# Creating a intermediate file for storing URL.
+obj.write_file()
 
-if args.path is not None:
-    path = args.path
-
-if args.testname is not None:
-    testname  = args.testname  
-
-# file_obj = open('./test/url.txt', "w") 
-f = open("url.txt", mode='w', encoding='utf-8') 
-f.write(endpoint)
-f.write(" ")
-f.write(username)
-f.write(" ")
-f.write(password)
-f.seek(0,0)
-
-tfail = dredd_work(endpoint, username, password, testname, path,tpass,tfail)
-
-f.close() 
-exit(tfail)
+# Running dredd
+exit(obj.dredd_work())

@@ -14,9 +14,8 @@ fs.readFile('url.txt', (err, data) => {
 
   text = data.toString();
   text = text.split(" ");
-  host = text[0].substring(8,text[0].length);;
-  auth = text[1]+":"+text[2];
-  console.log("host: "+host+"  auth: "+auth);
+  host = text[0].substring(8,text[0].length);
+  auth = text[1];
 
 });
 
