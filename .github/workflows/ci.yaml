@@ -8,10 +8,6 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - uses: SOPHIA2401/actions-setup-docker-compose@main
-      with:
-        version: '1.29.2'
-
     - name: Use Node.js 
       uses: actions/setup-node@v1  
     
@@ -20,6 +16,9 @@ jobs:
     - run: npm install hooks
     - run: npm install https
     - run: npm install fs
+
+    - name: Build the stack
+      run: docker-compose up -d
     
     - name: Run script file
       run: |
