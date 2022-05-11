@@ -9,7 +9,7 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Using Docker
-      uses: docker-practice/actions-setup-docker@master
+      uses: docker-compose -f "docker-compose.yml" up -d --build
 
     - name: Use Node.js 
       uses: actions/setup-node@v1  
@@ -19,16 +19,17 @@ jobs:
     - run: npm install hooks
     - run: npm install https
     - run: npm install fs
+    
     - name: Run script file
-
       run: |
-          set -x 
-          docker version
-          docker run --rm hello-world  
           dredd --version
           python driver-code.py          
       shell: bash
       working-directory: ./test
+
+    - name: Stop containers
+    if: always()
+    run: docker-compose -f "docker-compose.yml" down
 
         #  chmod +x ./test/driver-code.py
         #  ./test/driver-code.py
