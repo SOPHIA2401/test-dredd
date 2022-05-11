@@ -18,7 +18,7 @@ jobs:
     - run: npm install fs
 
     - name: Build the stack
-      run: docker-compose.yml up -d
+      run: docker-compose up
     
     - name: Run script file
       run: |
