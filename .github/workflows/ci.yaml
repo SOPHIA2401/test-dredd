@@ -20,16 +20,14 @@ jobs:
 
     - name: Build the stack
       run: |   
-        docker run -p 9200:9200 -p 9600:9600 -e "discovery.type=single-node" opensearchproject/opensearch:1.3.2 -d 
+        docker-compose up -d 
 
       shell: bash
       working-directory: ./test  
     
     - name: Run script file
       run: |
-          set NODE_TLS_REJECT_UNAUTHORIZED=0
-          dredd --level=debug
-          cat /etc/hosts
+          export NODE_TLS_REJECT_UNAUTHORIZED=0
           dredd --version
           python driver-code.py          
       shell: bash
@@ -43,6 +41,12 @@ jobs:
         #  ./test/driver-code.py
 
         # docker-compose up -d
+
+
+
+
+
+
 # name: CI
 
 # on: [push, pull_request]
