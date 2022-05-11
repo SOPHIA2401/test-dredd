@@ -11,7 +11,8 @@ jobs:
     - name: Use Node.js 
       uses: actions/setup-node@v1  
     
-    - run: sudo npm install dredd --global --unsafe-perm=true --allow-root
+    # - run: sudo npm install dredd --global --unsafe-perm=true --allow-root
+    - run: npm install dredd --global --unsafe-perm=true --allow-root
     - run: npm install node-fetch@2
     - run: npm install hooks
     - run: npm install https
