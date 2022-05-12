@@ -21,23 +21,71 @@ jobs:
     - name: Build the stack
       run: |   
         docker-compose up -d
-
       shell: bash
       working-directory: ./test  
 
     - name: checking docker command
-      run: docker ps -a  
+      run: sleep 200s  
+
+    - name: checking OpenSearch domain is up and running
+      run: echo "action_state=curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v " >> $GITHUB_ENV
+      run: echo "><><><><><<><><><><><><"
+      run: echo $env.action_state
     
     - name: Run script file
       run: |
           docker ps -a  
-          sleep 300s
           curl 'https://admin:admin@localhost:9200' -H 'Content-Type: application/json' --insecure -v 
           export NODE_TLS_REJECT_UNAUTHORIZED=0
           dredd --version
           python driver-code.py          
       shell: bash
       working-directory: ./test
+
+
+
+
+
+# name: CI
+
+# on: [push, pull_request]
+
+# jobs:
+#   run_tests:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@v2
+
+#     - name: Use Node.js 
+#       uses: actions/setup-node@v1  
+    
+#     - run: sudo npm install dredd --global --unsafe-perm=true --allow-root
+#     # - run: npm install dredd --global --unsafe-perm=true --allow-root
+#     - run: npm install node-fetch@2
+#     - run: npm install hooks
+#     - run: npm install https
+#     - run: npm install fs
+
+#     - name: Build the stack
+#       run: |   
+#         docker-compose up -d
+
+#       shell: bash
+#       working-directory: ./test  
+
+#     - name: checking docker command
+#       run: docker ps -a  
+    
+#     - name: Run script file
+#       run: |
+#           docker ps -a  
+#           sleep 300s
+#           curl 'https://admin:admin@localhost:9200' -H 'Content-Type: application/json' --insecure -v 
+#           export NODE_TLS_REJECT_UNAUTHORIZED=0
+#           dredd --version
+#           python driver-code.py          
+#       shell: bash
+#       working-directory: ./test
 
     # - name: Stop containers
     # if: always()
