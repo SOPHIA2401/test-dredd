@@ -28,7 +28,7 @@ components:
         version:
           $ref: '#/components/schemas/intermediateStructure'
         tagline:
-          type: string  
+          type: string
     intermediateStructure:
       type: object
       properties:
@@ -50,4 +50,5 @@ components:
         minimum_wire_compatibility_version:
           type: string
         minimum_index_compatibility_version:
-          type: string                   
+          type: string
+                          

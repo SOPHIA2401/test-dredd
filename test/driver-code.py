@@ -6,7 +6,6 @@ class Dredd:
         if endpoint is not None:
             self.endpoint = endpoint
         else:     
-            # self.endpoint = "https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com"
             self.endpoint = "https://127.0.0.1:9200"
 
         if user is not None:
@@ -32,13 +31,12 @@ class Dredd:
         file_obj.close()
 
     def dredd_work(self):
-        # Walking a test directory tree and run dredd framework.
+        # Walking in test directory tree and runing dredd framework.
         test_failed = 0
         for dirpath, dirnames, files in os.walk("./models"+self.path):
             curr_path = dirpath.split('/')
             curr_dir = curr_path[len(curr_path)-1]         
             if files:
-                # command = "dredd " + dirpath +"/"+ files[1]+ " " + self.endpoint+ " --user=" + self.user + " --hookfiles=" + dirpath + "/" + files[0]
                 command = "dredd " + dirpath +"/"+ files[1]+ " " + self.endpoint+ " --user=" + self.user + " --hookfiles=" + dirpath + "/" + files[0]
                 if self.test_name != "":
                     if self.test_name == curr_dir:
