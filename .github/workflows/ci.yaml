@@ -55,6 +55,10 @@ jobs:
     #   if: ${{ env.Resultt }}
     #   run: | 
     #     echo "yeahhh"  
+    - name: adding sleep
+      run: |
+        sleep 200s
+        python ./.github/workflows/test.py 
     
     - name: Run script file
       run: |
