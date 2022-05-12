@@ -7,7 +7,7 @@ class Dredd:
             self.endpoint = endpoint
         else:     
             # self.endpoint = "https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com"
-            self.endpoint = "http://127.0.0.1:9200"
+            self.endpoint = "https://127.0.0.1:9200"
 
         if user is not None:
             self.user = user
