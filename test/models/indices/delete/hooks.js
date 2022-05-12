@@ -29,7 +29,7 @@ hooks.before("/{index} > DELETE > 200 > application/json",function(transactions,
                 index: {
                     number_of_shards:1,
                     number_of_replicas:0
-                  }
+                   }
                 }    
             }),
             headers:{
