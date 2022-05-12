@@ -33,6 +33,7 @@ class Dredd:
     def dredd_work(self):
         # Walking in test directory tree and runing dredd framework.
         test_failed = 0
+        test_passed = 0
         for dirpath, dirnames, files in os.walk("./models"+self.path):
             curr_path = dirpath.split('/')
             curr_dir = curr_path[len(curr_path)-1]         
@@ -42,11 +43,17 @@ class Dredd:
                     if self.test_name == curr_dir:
                         result = os.system(command)
                         if(result != 0):
-                            test_failed = test_failed+1                               
+                            test_failed = test_failed+1  
+                        else:
+                            test_passed = test_passed+1                                  
                 else:
                     result = os.system(command)  
                     if(result != 0):
                         test_failed = test_failed+1
+                    else:
+                        test_passed = test_passed+1  
+        print("Total test cases: ", test_passed+test_failed)
+        print("Test failed: ", test_failed)
         return test_failed      
 
 
