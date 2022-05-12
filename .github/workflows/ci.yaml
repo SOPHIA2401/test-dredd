@@ -31,6 +31,7 @@ jobs:
     - name: Run script file
       run: |
           docker ps -a  
+          sleep 300s
           curl 'http://localhost:9200' -H 'Content-Type: application/json' -v 
           export NODE_TLS_REJECT_UNAUTHORIZED=0
           dredd --version
