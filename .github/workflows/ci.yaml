@@ -37,7 +37,7 @@ jobs:
     - name: Run script file
       run: |
           export NODE_TLS_REJECT_UNAUTHORIZED=0
-          python driver-code.py          
+          python driver-code.py  --path /indices     
       shell: bash
       working-directory: ./test
 

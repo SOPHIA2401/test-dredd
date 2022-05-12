@@ -33,14 +33,14 @@ hooks.before("/_cluster/settings > GET > 200 > application/json",function(transa
                 index: {
                     number_of_shards:1,
                     number_of_replicas:0
-                }
+                  }
                 }    
             }),
             headers:{
                 "content-type": "application/json; charset=UTF-8"
             }
         });
- 
+        hooks.log("in cluster settings");
         done();
     }
     request();
