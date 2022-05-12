@@ -30,25 +30,31 @@ jobs:
         echo "><><><><><<><><><><><><"
         echo ${{ env.Result }}  
 
-    - name: test results
-      if: ${{ env.Result }}
-      run: | 
-        echo "shouldn't run"
+    - name: running python file
+      run: |
+        python .github/workflows/test.py
+      shell: bash
+      working-directory: ./test   
+
+    # - name: test results
+    #   if: ${{ env.Result }}
+    #   run: | 
+    #     echo "shouldn't run"
   
 
-    - name: checking docker command
-      run: sleep 200s  
+    # - name: checking docker command
+    #   run: sleep 200s  
 
-    - name: checking OpenSearch domain is up and running
-      run: |
-        echo Resultt=$(curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v) >> $GITHUB_ENV
-        echo "><><><><><<><><><><><><"
-        echo ${{ env.Resultt }}
+    # - name: checking OpenSearch domain is up and running
+    #   run: |
+    #     echo Resultt=$(curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v) >> $GITHUB_ENV
+    #     echo "><><><><><<><><><><><><"
+    #     echo ${{ env.Resultt }}
 
-    - name: test results  2
-      if: ${{ env.Resultt }}
-      run: | 
-        echo "yeahhh"  
+    # - name: test results  2
+    #   if: ${{ env.Resultt }}
+    #   run: | 
+    #     echo "yeahhh"  
     
     - name: Run script file
       run: |
