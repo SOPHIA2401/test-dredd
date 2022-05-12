@@ -8,15 +8,7 @@ var protocol = "https";
 var auth = "";
 
 // Reading .txt file to set URL  
-fs.readFile('url.txt', (err, data) => {
-  if (err) throw err;
-
-  text = data.toString();
-  text = text.split(" ");
-  host = text[0].substring(8,text[0].length);
-  auth = text[1];
-
-});
+const data = fs.readFileSync('url.txt', {encoding:'utf8', flag:'r'});
   
 hooks.before("/{index} > PUT > 200 > application/json",function(transactions,done) {
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
@@ -37,7 +29,10 @@ hooks.before("/{index} > PUT > 200 > application/json",function(transactions,don
 hooks.after("/{index} > PUT > 200 > application/json",function(transactions, done){
   
     const request = async () => {
-      
+        text = data.toString();
+        text = text.split(" ");
+        host = text[0].substring(8,text[0].length);
+        auth = text[1];
         var url = protocol + "://" + auth + "@" + host;
         
         // Deleting cluster

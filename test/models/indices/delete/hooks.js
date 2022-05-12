@@ -8,21 +8,17 @@ var protocol = "https";
 var auth = "";
 
 // Reading .txt file to set URL  
-fs.readFile('url.txt', (err, data) => {
-  if (err) throw err;
-
-  text = data.toString();
-  text = text.split(" ");
-  host = text[0].substring(8,text[0].length);
-  auth = text[1];
-
-});
+const data = fs.readFileSync('url.txt', {encoding:'utf8', flag:'r'});
 
 hooks.before("/{index} > DELETE > 200 > application/json",function(transactions,done){
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
 
     const request = async () => {
-  
+        text = data.toString();
+        text = text.split(" ");
+        host = text[0].substring(8,text[0].length);
+        auth = text[1];
+
         var url = protocol + "://" + auth + "@" + host;
 
         // Create an index with non-default settings.
@@ -33,7 +29,7 @@ hooks.before("/{index} > DELETE > 200 > application/json",function(transactions,
                 index: {
                     number_of_shards:1,
                     number_of_replicas:0
-                }
+                  }
                 }    
             }),
             headers:{
