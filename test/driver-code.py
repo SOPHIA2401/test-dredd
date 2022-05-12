@@ -7,7 +7,7 @@ class Dredd:
             self.endpoint = endpoint
         else:     
             # self.endpoint = "https://search-movies-hqrmd5q7cqb7ru7tbypeicwsy4.us-east-1.es.amazonaws.com"
-            self.endpoint = "https://127.0.0.1:9200"
+            self.endpoint = "http://127.0.0.1:9200"
 
         if user is not None:
             self.user = user
@@ -38,6 +38,7 @@ class Dredd:
             curr_path = dirpath.split('/')
             curr_dir = curr_path[len(curr_path)-1]         
             if files:
+                # command = "dredd " + dirpath +"/"+ files[1]+ " " + self.endpoint+ " --user=" + self.user + " --hookfiles=" + dirpath + "/" + files[0]
                 command = "dredd " + dirpath +"/"+ files[1]+ " " + self.endpoint+ " --user=" + self.user + " --hookfiles=" + dirpath + "/" + files[0]
                 if self.test_name != "":
                     if self.test_name == curr_dir:
