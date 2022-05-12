@@ -18,7 +18,7 @@ paths:
           schema:
             type: boolean
             nullable: true
-          example: true  
+            example: true  
         - name: master_timeout
           in: query
           schema:
