@@ -32,9 +32,9 @@ jobs:
 
     - name: running python file
       run: |
-        python .github/workflows/test.py
-      shell: bash
-      working-directory: ./test   
+        python ./.github/workflows/test.py
+      # shell: bash
+      # working-directory: ./test   
 
     # - name: test results
     #   if: ${{ env.Result }}
