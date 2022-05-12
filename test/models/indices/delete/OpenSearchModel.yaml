@@ -14,7 +14,7 @@ paths:
             type: string
             pattern: ^[^+_\-\.][^\\, /*?"<>| ,#\nA-Z]+$
           required: true
-          example: true
+          example: books
         - name: expand_wildcards
           in: query
           schema:
