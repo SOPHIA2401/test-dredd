@@ -32,7 +32,7 @@ jobs:
       run: |
           docker ps -a  
           sleep 300s
-          curl 'https://localhost:9200' -H 'Content-Type: application/json' -v 
+          curl 'https://admin:admin@localhost:9200' -H 'Content-Type: application/json' --insecure -v 
           export NODE_TLS_REJECT_UNAUTHORIZED=0
           dredd --version
           python driver-code.py          
