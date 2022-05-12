@@ -28,9 +28,10 @@ jobs:
       run: sleep 200s  
 
     - name: checking OpenSearch domain is up and running
-      run: echo "action_state=curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v " >> $GITHUB_ENV
-      run: echo "><><><><><<><><><><><><"
-      run: echo $env.action_state
+      run: |
+        echo "action_state=curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v " >> $GITHUB_ENV
+        echo "><><><><><<><><><><><><"
+        echo $env.action_state
     
     - name: Run script file
       run: |
