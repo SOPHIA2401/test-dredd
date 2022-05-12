@@ -24,6 +24,12 @@ jobs:
       shell: bash
       working-directory: ./test  
 
+    - name: without sleep checking OpenSearch domain is up and running
+      run: |
+        echo Result=$(curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v) >> $GITHUB_ENV
+        echo "><><><><><<><><><><><><"
+        echo ${{ env.Result }}  
+
     - name: checking docker command
       run: sleep 200s  
 
