@@ -52,7 +52,9 @@ jobs:
           then
             echo "Issue with running opensearch domain."
             exit 1
-          fi   
+          fi  
+      shell: bash
+      working-directory: ./test       
 
     # - name: Setting up OpenSearch domain 
     #   run: python ./.github/workflows/test_url.py
