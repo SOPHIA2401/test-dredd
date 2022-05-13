@@ -42,7 +42,7 @@ jobs:
           if [ $(curl -s -o /dev/null --head -w "%{http_code}" 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v) -ne 200 ]; then
             sleep 30s
           else
-            echo  "Waiting for addtional 30 seconds.. for Opensearch Domain to be up."
+            echo  "Waiting for addtional 30 seconds.. for Opensearch domain to be up."
             sleep 30s
             break 
           fi  
