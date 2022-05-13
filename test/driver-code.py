@@ -3,7 +3,6 @@ import os
 
 class Dredd:
     def __init__(self, endpoint, user, path, test_name):
-
         if endpoint is not None:
             self.endpoint = endpoint
         else:     
@@ -35,7 +34,7 @@ class Dredd:
         # Walking in test directory tree and runing dredd framework.
         test_failed = 0
         test_passed = 0
-        for dirpath, files in os.walk("./models"+self.path):
+        for dirpath, dirnames, files in os.walk("./models"+self.path):
             curr_path = dirpath.split('/')
             curr_dir = curr_path[len(curr_path)-1]         
             if files:
