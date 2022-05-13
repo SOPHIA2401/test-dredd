@@ -9,6 +9,14 @@ var auth = "";
 
 // Reading .txt file to set URL  
 const data = fs.readFileSync('url.txt', {encoding:'utf8', flag:'r'});
+function address()
+{
+    text = data.toString();
+    text = text.split(" ");
+    host = text[0].substring(8,text[0].length);
+    auth = text[1];
+    return (protocol + "://" + auth + "@" + host); 
+}
 // const url = function() {
 //     text = data.toString();
 //     text = text.split(" ");
@@ -21,12 +29,12 @@ hooks.before("/_cluster/settings > GET > 200 > application/json",function(transa
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
   
     const request = async () => {
-        text = data.toString();
-        text = text.split(" ");
-        host = text[0].substring(8,text[0].length);
-        auth = text[1];
+        // text = data.toString();
+        // text = text.split(" ");
+        // host = text[0].substring(8,text[0].length);
+        // auth = text[1];
 
-        var url = protocol + "://" + auth + "@" + host;
+        var url = address();
         console.log(url)
         hooks.log("><><><><>><><><><>");
         // Create an index with non-default settings.
@@ -54,12 +62,12 @@ hooks.before("/_cluster/settings > GET > 200 > application/json",function(transa
 hooks.after("/_cluster/settings > GET > 200 > application/json",function(transactions, done){
   
     const request = async () => {
-        text = data.toString();
-        text = text.split(" ");
-        host = text[0].substring(8,text[0].length);
-        auth = text[1];
+        // text = data.toString();
+        // text = text.split(" ");
+        // host = text[0].substring(8,text[0].length);
+        // auth = text[1];
       
-        var url = protocol + "://" + auth + "@" + host;
+        var url = address();
         
         // Deleting cluster
         const del = await fetch(url+'/books',{
