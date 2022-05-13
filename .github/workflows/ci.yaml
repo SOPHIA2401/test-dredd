@@ -31,6 +31,9 @@ jobs:
       shell: bash
       working-directory: ./test  
 
+    - name: Setting up OpenSearch domain 
+      run: python ./.github/workflows/test_url.py      
+
     - name: Waiting for Opensearch domain to be up.
       run: |
         counter=1
@@ -58,8 +61,7 @@ jobs:
       shell: bash
       working-directory: ./test       
 
-    # - name: Setting up OpenSearch domain 
-    #   run: python ./.github/workflows/test_url.py
+
     
     - name: Run script file
       run: |
