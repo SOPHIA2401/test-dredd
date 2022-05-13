@@ -3,7 +3,7 @@ until [ $counter -gt 10 ]
 do
     result=$(curl -s -o /dev/null --head -w "%{http_code}" 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure)
     echo $result
-    if [ $? -eq 0 ]; then
+    if [ $result -eq 200 ]; then
         # sleep 10
         # echo -n "IN ELSE STATEMENT: "
         echo -n " Waiting for addtional 30 seconds.. for Opensearch Domain to be up."
@@ -13,7 +13,7 @@ do
         # echo -n " Waiting for addtional 30 seconds.. for Opensearch Domain to be up."
         # sleep 10  
         # break     
-        sleep 10
+        sleep 30
         echo -n "IN ELSE STATEMENT: "
     fi 
     echo -n " counter: $counter"

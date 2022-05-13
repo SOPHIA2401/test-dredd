@@ -40,6 +40,7 @@ jobs:
         until [ $counter -gt 10 ]
         do
           result=$(curl -s -o /dev/null --head -w "%{http_code}" 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v)
+          sleep 2s
           if [ $result -eq 200 ]; then
             echo -n "Waiting for addtional 30 seconds.. for Opensearch Domain to be up."
             sleep 30s 
@@ -48,7 +49,7 @@ jobs:
             sleep 30s
             echo -n "IN ELSE STATEMENT: "
           fi 
-          echo -n " counter: $counter"
+          echo -n "counter: $counter"
           (( counter = $counter+1 ))
           echo "><><><><><><><><>><"
           echo $counter
