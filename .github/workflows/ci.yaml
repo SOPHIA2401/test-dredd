@@ -34,7 +34,7 @@ jobs:
     - name: Waiting for Opensearch domain to be up.
       run: |
           counter=1
-          until [ $counter -gt 6 ]
+          until [ $counter -gt 10 ]
           do
             if [[ $(curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v ) == 0 ]]
             then
@@ -43,12 +43,12 @@ jobs:
               break 
             else
               sleep 30
-              echo "Result in else"
+              echo -n "IN ELSE STATEMENT: "
             fi 
             echo -n " counter: $counter"
             (( counter = counter+1 ))
           done
-          if counter==6
+          if counter==10
           then
             echo -n "Issue with running opensearch domain."
             exit 1
