@@ -39,9 +39,9 @@ jobs:
         counter=1
         until [ $counter -gt 10 ]
         do
-          result=$(curl -s -o /dev/null --head -w "%{http_code}" 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v)
-          sleep 2s
-          echo "result: $result"
+          curl -s -o /dev/null --head -w "%{http_code}" 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v
+          # sleep 2s
+          echo "result: $?"
           (( counter = $counter+1 ))
           echo -n "><><><><><><><><>><"
           echo $counter
