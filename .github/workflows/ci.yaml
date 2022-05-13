@@ -34,19 +34,19 @@ jobs:
     - name: checking OpenSearach domain is up
       run: |
           counter=1
-          while [ $counter -le 6 ]
+          while [ $counter -gt 6 ]
           do
             if curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v
             then
-              echo "Waiting for addtional 30 seconds.. for Opensearch Domain to be up."
+              echo "\nWaiting for addtional 30 seconds.. for Opensearch Domain to be up."
               sleep 30  
               break 
             else
               sleep 30
               echo "Result in else"
             fi 
-            echo $counter
-            ((counter++))
+            echo "\ncounter: $counter"
+            ((counter = counter+1))
           done
           if counter==6
           then
