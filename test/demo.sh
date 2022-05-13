@@ -1,7 +1,8 @@
 counter=1
 until [ $counter -gt 10 ]
 do
-    curl 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure -v
+    result=$(curl -s -o /dev/null --head -w "%{http_code}" 'https://admin:admin@localhost:9200' -H 'Content-Type:application/json' --insecure)
+    echo $result
     if [ $? -eq 0 ]; then
         # sleep 10
         # echo -n "IN ELSE STATEMENT: "
