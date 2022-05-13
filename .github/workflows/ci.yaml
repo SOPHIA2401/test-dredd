@@ -48,6 +48,7 @@ jobs:
             ((counter++))
           done
           if counter==6
+          then
             echo "Issue with running opensearch domain."
             exit 1
           fi   
