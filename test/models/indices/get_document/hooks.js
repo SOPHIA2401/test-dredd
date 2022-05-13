@@ -9,6 +9,14 @@ var auth = "";
 
 // Reading .txt file to set URL  
 const data = fs.readFileSync('url.txt', {encoding:'utf8', flag:'r'});
+function address()
+{
+    text = data.toString();
+    text = text.split(" ");
+    host = text[0].substring(8,text[0].length);
+    auth = text[1];
+    return (protocol + "://" + auth + "@" + host); 
+}
 
 // Get Document Type: _doc
 
@@ -16,11 +24,8 @@ hooks.before("/{index}/_doc/{id} > GET > 200 > application/json",function(transa
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
     
     const request = async () => {
-        text = data.toString();
-        text = text.split(" ");
-        host = text[0].substring(8,text[0].length);
-        auth = text[1];
-        var url = protocol + "://" + auth + "@" + host;
+
+        var url = address();
 
         // Create an index with non-default settings.
         const cluster = await fetch(url+'/books',{
@@ -60,11 +65,8 @@ hooks.before("/{index}/_doc/{id} > GET > 200 > application/json",function(transa
 hooks.after("/{index}/_doc/{id} > GET > 200 > application/json",function(transactions,done){
   
     const request = async () => {
-        text = data.toString();
-        text = text.split(" ");
-        host = text[0].substring(8,text[0].length);
-        auth = text[1];
-        var url = protocol + "://" + auth + "@" + host;
+
+        var url = address();
         
         // Deleting cluster
         const del = await fetch(url+'/books',{
@@ -82,11 +84,8 @@ hooks.before("/{index}/_source/{id} > GET > 200",function(transactions,done) {
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
     
     const request = async () => {
-        text = data.toString();
-        text = text.split(" ");
-        host = text[0].substring(8,text[0].length);
-        auth = text[1];
-        var url = protocol + "://" + auth + "@" + host;
+
+        var url = address();
 
         // Create an index with non-default settings.
         const cluster = await fetch(url+'/books',{
@@ -126,11 +125,8 @@ hooks.before("/{index}/_source/{id} > GET > 200",function(transactions,done) {
 hooks.after("/{index}/_source/{id} > GET > 200",function(transactions,done){
   
     const request = async () => {
-        text = data.toString();
-        text = text.split(" ");
-        host = text[0].substring(8,text[0].length);
-        auth = text[1];
-        var url = protocol + "://" + auth + "@" + host;
+
+        var url = address();
         
         // Deleting cluster
         const del = await fetch(url+'/books',{

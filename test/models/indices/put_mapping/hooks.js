@@ -18,9 +18,13 @@ function address()
     return (protocol + "://" + auth + "@" + host); 
 }
 
-hooks.before("/{index} > DELETE > 200 > application/json",function(transactions,done){
+// Put Mapping with Index.
+
+hooks.before("/{index}/_mapping > PUT > 200 > application/json",function(transactions,done) {
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
 
+    transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
+  
     const request = async () => {
 
         var url = address();
@@ -33,15 +37,40 @@ hooks.before("/{index} > DELETE > 200 > application/json",function(transactions,
                 index: {
                     number_of_shards:1,
                     number_of_replicas:0
-                   }
+                }
                 }    
             }),
             headers:{
                 "content-type": "application/json; charset=UTF-8"
             }
         });
- 
-        done();
+      
+        var mappings = {
+            properties:{
+              year:{
+                type: "text"
+              }
+            } 
+          }
+      
+          transactions.request.body = JSON.stringify(mappings);
+          done();
     }
-    request();  
+    request();
+});
+  
+hooks.after("/{index}/_mapping > PUT > 200 > application/json",function(transactions,done){
+  
+    const request = async () => {
+      
+        var url = address();
+        
+        // Deleting cluster
+        const del = await fetch(url+'/books',{
+            method: 'DELETE'
+        });
+
+        done();
+    }  
+    request();
 });

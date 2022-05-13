@@ -17,26 +17,14 @@ function address()
     auth = text[1];
     return (protocol + "://" + auth + "@" + host); 
 }
-// const url = function() {
-//     text = data.toString();
-//     text = text.split(" ");
-//     host = text[0].substring(8,text[0].length);
-//     auth = text[1];
-//     return (protocol + "://" + auth + "@" + host);
-// }
 
 hooks.before("/_cluster/settings > GET > 200 > application/json",function(transactions,done) {
     transactions.expected.headers['Content-Type'] =  "application/json; charset=UTF-8";
   
     const request = async () => {
-        // text = data.toString();
-        // text = text.split(" ");
-        // host = text[0].substring(8,text[0].length);
-        // auth = text[1];
 
         var url = address();
-        console.log(url)
-        hooks.log("><><><><>><><><><>");
+
         // Create an index with non-default settings.
         const cluster = await fetch(url+'/books',{
             method: 'PUT',
@@ -55,17 +43,12 @@ hooks.before("/_cluster/settings > GET > 200 > application/json",function(transa
 
         done();
     }
-
     request();
 });
   
 hooks.after("/_cluster/settings > GET > 200 > application/json",function(transactions, done){
   
     const request = async () => {
-        // text = data.toString();
-        // text = text.split(" ");
-        // host = text[0].substring(8,text[0].length);
-        // auth = text[1];
       
         var url = address();
         
